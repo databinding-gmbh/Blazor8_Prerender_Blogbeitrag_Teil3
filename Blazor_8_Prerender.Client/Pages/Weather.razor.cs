@@ -19,7 +19,9 @@ public partial class Weather
     {
         this.persistingState = this.ApplicationState.RegisterOnPersisting(this.PersistContent);
 
-        if (this.ApplicationState.TryTakeFromJson<WeatherForecast[]>("weatherData", out forecasts))
+        // Versucht die Daten aus dem ApplicationState zu holen.
+        // Falls diese nicht vorhanden sind, müssen die Daten vom Server aberufen werden.
+        if (this.ApplicationState.TryTakeFromJson("weatherData", out forecasts))
         {
         }
         else
@@ -28,6 +30,11 @@ public partial class Weather
         }
     }
 
+    /// <summary>
+    /// Methode schreibt alle Relevanten
+    /// Daten während des Prerendering in den ApplicationState.
+    /// </summary>
+    /// <returns></returns>
     private Task PersistContent()
     {
         this.ApplicationState.PersistAsJson("weatherData", forecasts);

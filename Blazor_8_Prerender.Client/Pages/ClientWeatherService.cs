@@ -5,7 +5,7 @@ namespace Blazor_8_Prerender.Controller;
 
 /// <summary>
 /// Service für das Abrufen von Wetterdaten über
-/// den Http Client
+/// den Http Client.
 /// </summary>
 public class ClientWeatherService : IWeatherService
 {

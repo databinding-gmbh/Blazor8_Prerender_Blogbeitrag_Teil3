@@ -33,8 +33,5 @@ public class ServerWeatherService : IWeatherService
     /// </summary>
     /// <returns></returns>
     /// <exception cref="NotSupportedException"></exception>
-    public Task UpdateAsync()
-    {
-        throw new NotSupportedException();
-    }
+    public Task UpdateAsync() => throw new NotSupportedException();
 }
