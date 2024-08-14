@@ -1,0 +1,51 @@
+﻿@using Blazor_8_Prerender.Client.Components
+@using Blazor_8_Prerender.Client.Layout
+<CascadingAuthenticationState>
+
+    <Router AppAssembly="typeof(Program).Assembly">
+        <Found Context="routeData">
+
+            @* 
+                Entferne die Prerender Komponente um
+                das Prerendering für Daten zu aktivieren.
+                Achtung: alle DI Services für den Client 
+                müssen im Server Projekt auch vorhanden sein.
+            *@
+
+          @*  <Prerender>
+                <Server>
+                    <MainLayout>
+                        <Body>
+                        <Splash></Splash>
+                        </Body>
+                    </MainLayout>
+                </Server>
+
+                <Client>
+ *@
+                    <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)">
+                        <Authorizing>
+                            @* Content wenn erwünscht *@
+                        </Authorizing>
+                        <NotAuthorized>
+                            <RedirectToLogin/>
+                        </NotAuthorized>
+                    </AuthorizeRouteView>
+
+                @* </Client>
+            </Prerender> *@
+            <FocusOnNavigate RouteData="routeData" Selector="h1" />
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p>Wo bin ich hier gelandet?</p>
+                
+                @* 
+                    BUG mit Layout NotFound: https://github.com/dotnet/aspnetcore/issues/52660
+                    Ich bin kein Fan von der vorgeschlagenen Lösung, da es Asp.Net Core mit Blazor Logik mischt.
+                *@
+            </LayoutView>
+        </NotFound>
+    </Router>
+
+</CascadingAuthenticationState>
