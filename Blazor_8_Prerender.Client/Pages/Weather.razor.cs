@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using Blazor_8_Prerender.Controller;
 using Microsoft.AspNetCore.Components;
 
 namespace Blazor_8_Prerender.Client.Pages;
@@ -6,13 +7,32 @@ namespace Blazor_8_Prerender.Client.Pages;
 public partial class Weather
 {
     private WeatherForecast[]? forecasts;
+    private PersistingComponentStateSubscription persistingState;
 
-    [Inject] private HttpClient httpClient { get; set; }
+    [Inject]
+    protected PersistentComponentState ApplicationState { get; set; }
+
+    [Inject]
+    private IWeatherService WeatherService { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        this.forecasts =
-            await this.httpClient.GetFromJsonAsync<WeatherForecast[]>("https://localhost:7272/api/Weather");
+        this.persistingState = this.ApplicationState.RegisterOnPersisting(this.PersistContent);
+
+        if (this.ApplicationState.TryTakeFromJson<WeatherForecast[]>("weatherData", out forecasts))
+        {
+        }
+        else
+        {
+            this.forecasts = await this.WeatherService.GetAsync();
+        }
+    }
+
+    private Task PersistContent()
+    {
+        this.ApplicationState.PersistAsJson("weatherData", forecasts);
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -28,6 +48,6 @@ public partial class Weather
 
     private async Task Update()
     {
-        await this.httpClient.PostAsync("api/Weather", null);
+        await this.WeatherService.UpdateAsync();
     }
 }

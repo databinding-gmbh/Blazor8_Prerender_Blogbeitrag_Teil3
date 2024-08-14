@@ -1,5 +1,6 @@
 using Blazor_8_Prerender.Client;
 using Blazor_8_Prerender.Client.Components;
+using Blazor_8_Prerender.Controller;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -21,5 +22,7 @@ builder.Services.AddAuthorizationCore();
 
 builder.Services.AddSingleton<AuthenticationStateProvider, PersistentAuthenticationStateProvider>();
 builder.Services.AddScoped<IBlazorRenderStateService, WasmBlazorRenderStateService>();
+
+builder.Services.AddSingleton<IWeatherService, ClientWeatherService>();
 
 await builder.Build().RunAsync();

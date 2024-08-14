@@ -1,6 +1,7 @@
 using Blazor_8_Prerender.Client.Components;
 using Blazor_8_Prerender.Components;
 using Blazor_8_Prerender.Components.Account;
+using Blazor_8_Prerender.Controller;
 using Blazor_8_Prerender.Data;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,6 +19,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, PersistingServerAuthenticationStateProvider>();
+
+builder.Services.AddSingleton<IWeatherService, ServerWeatherService>();
 
 builder.Services.AddAuthorization();
 

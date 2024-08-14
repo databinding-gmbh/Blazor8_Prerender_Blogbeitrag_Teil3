@@ -4,26 +4,7 @@
 
     <Router AppAssembly="typeof(Program).Assembly">
         <Found Context="routeData">
-
-            @* 
-                Entferne die Prerender Komponente um
-                das Prerendering für Daten zu aktivieren.
-                Achtung: alle DI Services für den Client 
-                müssen im Server Projekt auch vorhanden sein.
-            *@
-
-          @*  <Prerender>
-                <Server>
-                    <MainLayout>
-                        <Body>
-                        <Splash></Splash>
-                        </Body>
-                    </MainLayout>
-                </Server>
-
-                <Client>
- *@
-                    <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)">
+                    <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)">
                         <Authorizing>
                             @* Content wenn erwünscht *@
                         </Authorizing>
@@ -31,9 +12,6 @@
                             <RedirectToLogin/>
                         </NotAuthorized>
                     </AuthorizeRouteView>
-
-                @* </Client>
-            </Prerender> *@
             <FocusOnNavigate RouteData="routeData" Selector="h1" />
         </Found>
         <NotFound>

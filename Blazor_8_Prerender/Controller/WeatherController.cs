@@ -8,21 +8,18 @@ namespace Blazor_8_Prerender.Controller;
 [ApiController]
 public class WeatherController : ControllerBase
 {
+    private readonly IWeatherService _weatherService;
+
+    public WeatherController(IWeatherService weatherService)
+    {
+        _weatherService = weatherService;
+    }
+
     public async Task<ActionResult<WeatherForecast[]>> Get()
     {
-        // Simulate asynchronous loading to demonstrate a loading indicator
-        await Task.Delay(500);
+        var data = await this._weatherService.GetAsync();
 
-        var startDate = DateOnly.FromDateTime(DateTime.Now);
-        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        var forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = startDate.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = summaries[Random.Shared.Next(summaries.Length)]
-        }).ToArray();
-
-        return this.Ok(forecasts);
+        return this.Ok(data);
     }
 
     [HttpPost]
@@ -31,7 +28,7 @@ public class WeatherController : ControllerBase
     {
         await Task.Delay(500);
 
-        Console.WriteLine("Log");
+        Console.WriteLine("Ist gemacht");
 
         return Ok();
     }
