@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor_8_Prerender", "Blazor_8_Prerender\Blazor_8_Prerender.csproj", "{2DAB0E2E-2E99-460F-B76A-2B31D10544D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor_8_Prerender.Client", "Blazor_8_Prerender.Client\Blazor_8_Prerender.Client.csproj", "{7A72866E-805C-4EC6-A740-9330F4BFBAB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DAB0E2E-2E99-460F-B76A-2B31D10544D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DAB0E2E-2E99-460F-B76A-2B31D10544D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DAB0E2E-2E99-460F-B76A-2B31D10544D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DAB0E2E-2E99-460F-B76A-2B31D10544D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A72866E-805C-4EC6-A740-9330F4BFBAB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A72866E-805C-4EC6-A740-9330F4BFBAB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A72866E-805C-4EC6-A740-9330F4BFBAB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A72866E-805C-4EC6-A740-9330F4BFBAB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {233F8A7F-355C-4740-B24F-D6D56DAB4C31}
+	EndGlobalSection
+EndGlobal
