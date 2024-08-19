@@ -18,7 +18,7 @@ public class ClientWeatherService : IWeatherService
 
     public async Task<Weather.WeatherForecast[]> GetAsync()
     {
-        var data = await this.client.GetFromJsonAsync<Weather.WeatherForecast[]>("https://localhost:7272/api/Weather");
+        var data = await this.client.GetFromJsonAsync<Weather.WeatherForecast[]>("/api/Weather");
 
         return data;
     }

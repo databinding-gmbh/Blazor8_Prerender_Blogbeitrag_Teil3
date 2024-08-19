@@ -20,7 +20,7 @@ public partial class Weather
         this.persistingState = this.ApplicationState.RegisterOnPersisting(this.PersistContent);
 
         // Versucht die Daten aus dem ApplicationState zu holen.
-        // Falls diese nicht vorhanden sind, müssen die Daten vom Server aberufen werden.
+        // Falls diese nicht vorhanden sind, müssen die Daten vom Server abgerufen werden.
         if (this.ApplicationState.TryTakeFromJson("weatherData", out forecasts))
         {
         }

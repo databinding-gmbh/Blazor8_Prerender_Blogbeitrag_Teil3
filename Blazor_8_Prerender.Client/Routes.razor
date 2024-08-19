@@ -1,5 +1,4 @@
-﻿@using Blazor_8_Prerender.Client.Components
-@using Blazor_8_Prerender.Client.Layout
+﻿@using Blazor_8_Prerender.Client.Layout
 <CascadingAuthenticationState>
 
     <Router AppAssembly="typeof(Program).Assembly">
@@ -20,7 +19,6 @@
                 
                 @* 
                     BUG mit Layout NotFound: https://github.com/dotnet/aspnetcore/issues/52660
-                    Ich bin kein Fan von der vorgeschlagenen Lösung, da es Asp.Net Core mit Blazor Logik mischt.
                 *@
             </LayoutView>
         </NotFound>
