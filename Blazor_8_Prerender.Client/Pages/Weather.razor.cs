@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Blazor_8_Prerender.Client.Pages;
 
-public partial class Weather
+public partial class Weather : IDisposable
 {
     private WeatherForecast[]? forecasts;
     private PersistingComponentStateSubscription persistingState;
@@ -57,4 +57,6 @@ public partial class Weather
     {
         await this.WeatherService.UpdateAsync();
     }
+
+    public void Dispose() => persistingState.Dispose();
 }
