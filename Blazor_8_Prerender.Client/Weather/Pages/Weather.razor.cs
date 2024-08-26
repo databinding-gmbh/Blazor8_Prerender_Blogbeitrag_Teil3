@@ -20,7 +20,7 @@ public partial class Weather : IDisposable
 
         // Versucht die Daten aus dem ApplicationState zu holen.
         // Falls diese nicht vorhanden sind, müssen die Daten vom Server abgerufen werden.
-        if (this.ApplicationState.TryTakeFromJson("weatherData", out forecasts))
+        if (this.ApplicationState.TryTakeFromJson("weatherData", out this.forecasts))
         {
         }
         else
@@ -36,7 +36,7 @@ public partial class Weather : IDisposable
     /// <returns></returns>
     private Task PersistContent()
     {
-        this.ApplicationState.PersistAsJson("weatherData", forecasts);
+        this.ApplicationState.PersistAsJson("weatherData", this.forecasts);
 
         return Task.CompletedTask;
     }
@@ -49,7 +49,7 @@ public partial class Weather : IDisposable
         public DateOnly Date { get; set; }
         public int TemperatureC { get; set; }
         public string? Summary { get; set; }
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        public int TemperatureF => 32 + (int)(this.TemperatureC / 0.5556);
     }
 
     private async Task Update()
@@ -57,5 +57,9 @@ public partial class Weather : IDisposable
         await this.WeatherService.UpdateAsync();
     }
 
-    public void Dispose() => persistingState.Dispose();
+    public void Dispose()
+    {
+        this.persistingState.Dispose();
+        GC.SuppressFinalize(this);
+    }
 }

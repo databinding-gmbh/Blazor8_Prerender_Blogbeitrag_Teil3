@@ -9,16 +9,16 @@ namespace Blazor_8_Prerender.Controller;
 [ApiController]
 public class WeatherController : ControllerBase
 {
-    private readonly IWeatherService _weatherService;
+    private readonly IWeatherService weatherService;
 
     public WeatherController(IWeatherService weatherService)
     {
-        _weatherService = weatherService;
+        this.weatherService = weatherService;
     }
 
     public async Task<ActionResult<Weather.WeatherForecast[]>> Get()
     {
-        var data = await this._weatherService.GetAsync();
+        var data = await this.weatherService.GetAsync();
 
         return this.Ok(data);
     }
@@ -31,6 +31,6 @@ public class WeatherController : ControllerBase
 
         Console.WriteLine("Ist gemacht");
 
-        return Ok();
+        return this.Ok();
     }
 }

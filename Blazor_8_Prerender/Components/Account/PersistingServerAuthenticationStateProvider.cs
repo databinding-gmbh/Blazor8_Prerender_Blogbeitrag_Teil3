@@ -14,7 +14,7 @@ namespace Blazor_8_Prerender.Components.Account
     internal sealed class PersistingServerAuthenticationStateProvider : ServerAuthenticationStateProvider, IDisposable
     {
         private readonly PersistentComponentState state;
-        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IHttpContextAccessor contextAccessor;
         private readonly IdentityOptions options;
 
         private readonly PersistingComponentStateSubscription subscription;
@@ -26,12 +26,12 @@ namespace Blazor_8_Prerender.Components.Account
             IOptions<IdentityOptions> optionsAccessor,
             IHttpContextAccessor contextAccessor)
         {
-            state = persistentComponentState;
-            _contextAccessor = contextAccessor;
-            options = optionsAccessor.Value;
+            this.state = persistentComponentState;
+            this.contextAccessor = contextAccessor;
+            this.options = optionsAccessor.Value;
 
-            AuthenticationStateChanged += OnAuthenticationStateChanged;
-            subscription = state.RegisterOnPersisting(OnPersistingAsync, RenderMode.InteractiveWebAssembly);
+            this.AuthenticationStateChanged += this.OnAuthenticationStateChanged;
+            this.subscription = this.state.RegisterOnPersisting(this.OnPersistingAsync, RenderMode.InteractiveWebAssembly);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Blazor_8_Prerender.Components.Account
              * Zugriff auf Cookies oder Routen zu erhalten.
             */
 
-            if (this._contextAccessor.HttpContext.Request.Path.StartsWithSegments("/auth"))
+            if (this.contextAccessor.HttpContext.Request.Path.StartsWithSegments("/auth"))
             {
                 // Für Test Zwecke, kann ein nicht Authorisierter Benutzer zurückgegeben werden.
                 ////return Task.FromResult(new AuthenticationState(new ClaimsPrincipal()));
@@ -62,27 +62,27 @@ namespace Blazor_8_Prerender.Components.Account
 
         private void OnAuthenticationStateChanged(Task<AuthenticationState> task)
         {
-            authenticationStateTask = task;
+            this.authenticationStateTask = task;
         }
 
         private async Task OnPersistingAsync()
         {
-            if (authenticationStateTask is null)
+            if (this.authenticationStateTask is null)
             {
-                throw new UnreachableException($"Authentication state not set in {nameof(OnPersistingAsync)}().");
+                throw new UnreachableException($"Authentication state not set in {nameof(this.OnPersistingAsync)}().");
             }
 
-            var authenticationState = await authenticationStateTask;
+            var authenticationState = await this.authenticationStateTask;
             var principal = authenticationState.User;
 
             if (principal.Identity?.IsAuthenticated == true)
             {
-                var userId = principal.FindFirst(options.ClaimsIdentity.UserIdClaimType)?.Value;
-                var email = principal.FindFirst(options.ClaimsIdentity.EmailClaimType)?.Value;
+                var userId = principal.FindFirst(this.options.ClaimsIdentity.UserIdClaimType)?.Value;
+                var email = principal.FindFirst(this.options.ClaimsIdentity.EmailClaimType)?.Value;
 
                 if (userId != null && email != null)
                 {
-                    state.PersistAsJson(nameof(UserInfo), new UserInfo
+                    this.state.PersistAsJson(nameof(UserInfo), new UserInfo
                     {
                         UserId = userId,
                         Email = email,
@@ -93,8 +93,8 @@ namespace Blazor_8_Prerender.Components.Account
 
         public void Dispose()
         {
-            subscription.Dispose();
-            AuthenticationStateChanged -= OnAuthenticationStateChanged;
+            this.subscription.Dispose();
+            this.AuthenticationStateChanged -= this.OnAuthenticationStateChanged;
         }
     }
 }

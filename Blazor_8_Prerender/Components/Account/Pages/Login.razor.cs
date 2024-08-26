@@ -17,10 +17,10 @@ public partial class Login
 
     protected override async Task OnInitializedAsync()
     {
-        if (HttpMethods.IsGet(HttpContext.Request.Method))
+        if (HttpMethods.IsGet(this.HttpContext.Request.Method))
         {
             // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
         }
     }
 
@@ -29,33 +29,38 @@ public partial class Login
         // This doesn't count login failures towards account lockout
         // To enable password failures to trigger account lockout, set lockoutOnFailure: true
         var result =
-            await SignInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe,
-                lockoutOnFailure: false);
+            await this.SignInManager.PasswordSignInAsync(
+                this.Input.Email,
+                this.Input.Password,
+                this.Input.RememberMe,
+                                                         lockoutOnFailure: false);
         if (result.Succeeded)
         {
-            Logger.LogInformation("User logged in.");
-            RedirectManager.RedirectTo(ReturnUrl);
+            this.Logger.LogInformation("User logged in.");
+            this.RedirectManager.RedirectTo(this.ReturnUrl);
         }
         else if (result.RequiresTwoFactor)
         {
-            RedirectManager.RedirectTo(
+            this.RedirectManager.RedirectTo(
                 "Account/LoginWith2fa",
-                new() { ["returnUrl"] = ReturnUrl, ["rememberMe"] = Input.RememberMe });
+                new() { ["returnUrl"] = this.ReturnUrl, ["rememberMe"] = this.Input.RememberMe });
         }
         else if (result.IsLockedOut)
         {
-            Logger.LogWarning("User account locked out.");
-            RedirectManager.RedirectTo("Account/Lockout");
+            this.Logger.LogWarning("User account locked out.");
+            this.RedirectManager.RedirectTo("Account/Lockout");
         }
         else
         {
-            errorMessage = "Error: Invalid login attempt.";
+            this.errorMessage = "Error: Invalid login attempt.";
         }
     }
 
     private sealed class InputModel
     {
-        [Required] [EmailAddress] public string Email { get; set; } = "";
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = "";
 
         [Required]
         [DataType(DataType.Password)]

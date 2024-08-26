@@ -67,7 +67,7 @@ else
 }
 
 @code {
-    private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
+    private const string authenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
     private string? message;
     private ApplicationUser user = default!;
@@ -93,10 +93,10 @@ else
         // Strip spaces and hyphens
         var verificationCode = Input.Code.Replace(" ", string.Empty).Replace("-", string.Empty);
 
-        var is2faTokenValid = await UserManager.VerifyTwoFactorTokenAsync(
+        var is2FaTokenValid = await UserManager.VerifyTwoFactorTokenAsync(
             user, UserManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
 
-        if (!is2faTokenValid)
+        if (!is2FaTokenValid)
         {
             message = "Error: Verification code is invalid.";
             return;
@@ -155,7 +155,7 @@ else
     {
         return string.Format(
             CultureInfo.InvariantCulture,
-            AuthenticatorUriFormat,
+            authenticatorUriFormat,
             UrlEncoder.Encode("Microsoft.AspNetCore.Identity.UI"),
             UrlEncoder.Encode(email),
             unformattedKey);
