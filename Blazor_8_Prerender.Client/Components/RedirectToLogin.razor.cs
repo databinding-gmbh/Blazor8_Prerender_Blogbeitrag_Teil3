@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace Blazor_8_Prerender.Client;
+namespace Blazor_8_Prerender.Client.Components;
 
 public partial class RedirectToLogin
 {

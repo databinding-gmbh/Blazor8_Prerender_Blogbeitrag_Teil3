@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Blazor_8_Prerender.Client.Pages;
+using Blazor_8_Prerender.Client.Weather.Services;
 
 namespace Blazor_8_Prerender.Controller;
 

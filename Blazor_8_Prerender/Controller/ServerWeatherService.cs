@@ -1,4 +1,6 @@
 ﻿using Blazor_8_Prerender.Client.Pages;
+using Blazor_8_Prerender.Client.Weather.Pages;
+using Blazor_8_Prerender.Client.Weather.Services;
 using static Blazor_8_Prerender.Client.Pages.Weather;
 
 namespace Blazor_8_Prerender.Controller;
@@ -10,13 +12,13 @@ namespace Blazor_8_Prerender.Controller;
 /// </summary>
 public class ServerWeatherService : IWeatherService
 {
-    public async Task<WeatherForecast[]> GetAsync()
+    public async Task<Weather.WeatherForecast[]> GetAsync()
     {
         await Task.Delay(500);
 
         var startDate = DateOnly.FromDateTime(DateTime.Now);
         var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        var forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        var forecasts = Enumerable.Range(1, 5).Select(index => new Weather.WeatherForecast
         {
             Date = startDate.AddDays(index),
             TemperatureC = Random.Shared.Next(-20, 55),

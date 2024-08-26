@@ -1,7 +1,4 @@
-﻿using Blazor_8_Prerender.Client.Pages;
-using static Blazor_8_Prerender.Client.Pages.Weather;
-
-namespace Blazor_8_Prerender.Controller;
+﻿namespace Blazor_8_Prerender.Client.Weather.Services;
 
 /// <summary>
 /// Abstraktion des Weather Service,
@@ -10,6 +7,6 @@ namespace Blazor_8_Prerender.Controller;
 /// </summary>
 public interface IWeatherService
 {
-    Task<WeatherForecast[]> GetAsync();
+    Task<Pages.Weather.WeatherForecast[]> GetAsync();
     Task UpdateAsync();
 }

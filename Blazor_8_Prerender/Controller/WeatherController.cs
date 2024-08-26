@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Blazor_8_Prerender.Client.Weather.Pages;
+using Blazor_8_Prerender.Client.Weather.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static Blazor_8_Prerender.Client.Pages.Weather;
 
@@ -15,7 +17,7 @@ public class WeatherController : ControllerBase
         _weatherService = weatherService;
     }
 
-    public async Task<ActionResult<WeatherForecast[]>> Get()
+    public async Task<ActionResult<Weather.WeatherForecast[]>> Get()
     {
         var data = await this._weatherService.GetAsync();
 

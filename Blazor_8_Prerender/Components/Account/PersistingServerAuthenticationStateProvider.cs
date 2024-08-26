@@ -43,17 +43,17 @@ namespace Blazor_8_Prerender.Components.Account
         /// <returns></returns>
         public override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
+            /*
+             * Hier kann Logik eingebaut werden
+             * die den Auth State des Benutzers während Prerendering
+             * ändert. Z.B. Kann dies von Benutzerdefinierten Cookies abhängen oder
+             * von einer bestimmten Route. Mit dem IHttpConextAccessor kann
+             * der HttpContext über den Konstruktor eingefügt werden um so
+             * Zugriff auf Cookies oder Routen zu erhalten.
+            */
+
             if (this._contextAccessor.HttpContext.Request.Path.StartsWithSegments("/auth"))
             {
-                /*
-                 * Hier kann Logik eingebaut werden
-                 * die den Auth State des Benutzers während Prerendering
-                 * ändert. Z.B. Kann dies von Custom Cookies abhängen oder
-                 * von einer bestimmten Route. Mit dem IHttpConextAccessor kann
-                 * der HttpContext über den Konstruktor eingefügt werden um so
-                 * Zugriff auf Cookies oder Routen zu erhalten.
-                */
-
                 // Für Test Zwecke, kann ein nicht Authorisierter Benutzer zurückgegeben werden.
                 ////return Task.FromResult(new AuthenticationState(new ClaimsPrincipal()));
             }
