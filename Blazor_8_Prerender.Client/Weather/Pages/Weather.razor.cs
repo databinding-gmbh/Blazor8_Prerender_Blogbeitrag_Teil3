@@ -1,5 +1,4 @@
 ﻿using Blazor_8_Prerender.Client.Weather.Services;
-using Blazor_8_Prerender.Controller;
 using Microsoft.AspNetCore.Components;
 
 namespace Blazor_8_Prerender.Client.Weather.Pages;

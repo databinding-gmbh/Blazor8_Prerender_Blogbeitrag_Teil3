@@ -2,7 +2,6 @@
 using Blazor_8_Prerender.Client.Weather.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static Blazor_8_Prerender.Client.Pages.Weather;
 
 namespace Blazor_8_Prerender.Controller;
 

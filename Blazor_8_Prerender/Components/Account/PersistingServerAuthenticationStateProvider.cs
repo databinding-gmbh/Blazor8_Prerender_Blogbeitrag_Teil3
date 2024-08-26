@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
-using System.Security.Claims;
 
 namespace Blazor_8_Prerender.Components.Account
 {

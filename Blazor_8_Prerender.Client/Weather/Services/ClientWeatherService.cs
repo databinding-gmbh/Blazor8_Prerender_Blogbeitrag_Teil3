@@ -1,8 +1,6 @@
 ﻿using System.Net.Http.Json;
-using Blazor_8_Prerender.Client.Pages;
-using Blazor_8_Prerender.Client.Weather.Services;
 
-namespace Blazor_8_Prerender.Controller;
+namespace Blazor_8_Prerender.Client.Weather.Services;
 
 /// <summary>
 /// Service für das Abrufen von Wetterdaten über
@@ -17,9 +15,9 @@ public class ClientWeatherService : IWeatherService
         this.client = client;
     }
 
-    public async Task<Weather.WeatherForecast[]> GetAsync()
+    public async Task<Pages.Weather.WeatherForecast[]> GetAsync()
     {
-        var data = await this.client.GetFromJsonAsync<Weather.WeatherForecast[]>("/api/Weather");
+        var data = await this.client.GetFromJsonAsync<Pages.Weather.WeatherForecast[]>("/api/Weather");
 
         return data;
     }

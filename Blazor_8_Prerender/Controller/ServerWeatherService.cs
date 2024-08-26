@@ -1,7 +1,5 @@
-﻿using Blazor_8_Prerender.Client.Pages;
-using Blazor_8_Prerender.Client.Weather.Pages;
+﻿using Blazor_8_Prerender.Client.Weather.Pages;
 using Blazor_8_Prerender.Client.Weather.Services;
-using static Blazor_8_Prerender.Client.Pages.Weather;
 
 namespace Blazor_8_Prerender.Controller;
 
